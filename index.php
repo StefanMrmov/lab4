@@ -1,4 +1,12 @@
 <?php
+session_start();
+require 'jwt_helper.php';
+
+// Проверка дали JWT токенот постои и е валиден
+if (!isset($_SESSION['jwt']) || !decodeJWT($_SESSION['jwt'])) {
+    header("Location: login.php");
+    exit;
+}
 $db =new SQLite3(__DIR__ . '/db.sqlite');
 
 $query= "SELECT * FROM expenses";
@@ -11,8 +19,8 @@ if(!$result){
 <a href="add_form.php">
     Add Expense
 </a>
-<table>
-    <thead>
+<table >
+    <thead >
     <tr>
         <th>ID</th>
         <th>name</th>

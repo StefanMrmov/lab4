@@ -13,6 +13,15 @@ try {
     )";
     $pdo->exec($query);
 
+    $query1 = "CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        password TEXT NOT NULL,
+        role TEXT NOT NULL
+    )";
+
+    $pdo->exec($query1);
+
 } catch (PDOException $e) {
     die($e->getMessage());
 }
